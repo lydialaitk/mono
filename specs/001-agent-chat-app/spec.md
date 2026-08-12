@@ -16,6 +16,7 @@
 - Q: When the user sends a follow-up message in the same thread, should the backend agent receive the full conversation history or only the latest message? → A: Full in-session history
 - Q: After the user refreshes the page, what should happen to the single chat thread in v1? → A: Restore the current thread after refresh within the same browser session
 - Q: What should the backend status endpoint mean in v1 when real LLM mode is enabled? → A: Process only
+- Q: How should the app handle an empty or whitespace-only message? → A: Block submission and show a validation message
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -106,8 +107,8 @@ checks are directed to that location.
 
 - What happens when the backend becomes unavailable after the user submits a
   message but before the streamed reply completes?
-- How does the system handle an empty message or a message made only of
-  whitespace?
+- How does the interface present validation feedback for an empty or
+  whitespace-only message while keeping the existing thread unchanged?
 - What happens when the configured backend endpoint is missing, malformed, or
   unreachable at startup?
 - What happens if the browser session ends after the page was previously refreshed
@@ -119,6 +120,9 @@ checks are directed to that location.
 
 - **FR-001**: The system MUST provide a web chat interface where a user can enter
   and submit a message written in Traditional Chinese.
+- **FR-001a**: The system MUST block submission of an empty or whitespace-only
+  message and show a user-visible validation message without sending a backend
+  request.
 - **FR-002**: The system MUST maintain exactly one chat thread for v1 and display
   messages for that thread in chronological order.
 - **FR-002a**: The system MUST restore the current single chat thread after a page
@@ -163,7 +167,8 @@ checks are directed to that location.
   the same ordered history is the context sent with each follow-up request and
   restored after refresh within the same browser session.
 - **Message**: A chat item authored by either the user or the assistant, with
-  content, author role, lifecycle state, and display order in the thread.
+  content, author role, lifecycle state, and display order in the thread; an
+  invalid blank draft does not become a message entry in the thread.
 - **Backend Endpoint Configuration**: The runtime-selected backend location used
   by the frontend to send chat requests and check backend status.
 - **Service Status Result**: A machine-readable status response that communicates
