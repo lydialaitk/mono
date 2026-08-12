@@ -151,8 +151,8 @@ backend location.
 
 - [X] T050 [P] Document canonical npm commands and environment setup in `README.md`
 - [X] T051 [P] Add browser-level smoke validation for refresh restore in `frontend/tests/integration/chat-refresh.test.ts`
-- [ ] T052 Validate all scenarios in `specs/001-agent-chat-app/quickstart.md`, including confirming first streamed output appears within 2 seconds in mock mode
-- [ ] T053 [P] Verify contract alignment against `specs/001-agent-chat-app/contracts/http-api.yaml`
+- [X] T052 Validate all scenarios in `specs/001-agent-chat-app/quickstart.md`, including confirming first streamed output appears within 2 seconds in mock mode
+- [X] T053 [P] Verify contract alignment against `specs/001-agent-chat-app/contracts/http-api.yaml`
 
 ---
 
