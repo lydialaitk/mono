@@ -7,4 +7,5 @@ build/
 
 # Vitest may emit transformed test artifacts alongside sources.
 backend/tests/**/*.js
+*.tsbuildinfo
 

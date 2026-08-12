@@ -35,12 +35,12 @@ implementation and testing of each story.
 - [X] T001 Create repository layout directories `backend/`, `frontend/`, and `shared/` per `specs/001-agent-chat-app/plan.md`
 - [X] T002 Initialize root `package.json` with npm workspaces and scripts `dev`, `build`, `start`, `test`, `lint`, and `check`
 - [X] T003 [P] Initialize backend package manifest and dependencies in `backend/package.json`
-- [ ] T004 [P] Initialize frontend package manifest and Vite dependencies in `frontend/package.json`
-- [ ] T005 [P] Initialize shared package manifest in `shared/package.json`
-- [ ] T006 [P] Configure TypeScript project references in `tsconfig.json`, `backend/tsconfig.json`, `frontend/tsconfig.json`, and `shared/tsconfig.json`
-- [ ] T007 [P] Configure linting and formatting in `eslint.config.js` and `.prettierignore`
-- [ ] T008 Create frontend HTML shell in `frontend/public/index.html` and entry stub in `frontend/src/main.ts`
-- [ ] T009 [P] Create CI parity workflow that runs `npm run check` in `.github/workflows/check.yml`
+- [X] T004 [P] Initialize frontend package manifest and Vite dependencies in `frontend/package.json`
+- [X] T005 [P] Initialize shared package manifest in `shared/package.json`
+- [X] T006 [P] Configure TypeScript project references in `tsconfig.json`, `backend/tsconfig.json`, `frontend/tsconfig.json`, and `shared/tsconfig.json`
+- [X] T007 [P] Configure linting and formatting in `eslint.config.mjs` and `.prettierignore`
+- [X] T008 Create frontend HTML shell in `frontend/public/index.html` and entry stub in `frontend/src/main.ts`
+- [X] T009 [P] Create CI parity workflow that runs `npm run check` in `.github/workflows/check.yml`
 
 ---
 
@@ -50,14 +50,14 @@ implementation and testing of each story.
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T010 Define shared chat contract types in `shared/src/contracts/chat.ts`
-- [ ] T011 [P] Define shared status contract types in `shared/src/contracts/status.ts`
-- [ ] T012 [P] Define shared stream event types in `shared/src/events/stream-event.ts`
+- [X] T010 Define shared chat contract types in `shared/src/contracts/chat.ts`
+- [X] T011 [P] Define shared status contract types in `shared/src/contracts/status.ts`
+- [X] T012 [P] Define shared stream event types in `shared/src/events/stream-event.ts`
 - [X] T013 Implement backend configuration loader in `backend/src/app/config.ts`
 - [X] T014 [P] Implement structured telemetry event helper in `backend/src/telemetry/events.ts`
 - [X] T015 Implement Fastify server bootstrap in `backend/src/app/server.ts`
 - [X] T016 Create API route registration shell in `backend/src/api/routes.ts`
-- [ ] T017 [P] Implement frontend backend-endpoint config loader in `frontend/src/config/backend-endpoint.ts`
+- [X] T017 [P] Implement frontend backend-endpoint config loader in `frontend/src/config/backend-endpoint.ts`
 - [X] T018 Wire server entrypoint and static asset serving in `backend/src/app/main.ts`
 - [X] T019 [P] Add Vitest workspace wiring and `npm run check` test hooks in `vitest.config.ts` and root `package.json`
 
@@ -78,26 +78,26 @@ thread is restored.
 
 ### Implementation for User Story 1
 
-- [ ] T020 [P] [US1] Add unit tests for blank-message validation in `frontend/tests/unit/chat-validation.test.ts`
-- [ ] T021 [P] [US1] Add unit tests for session snapshot save/load helpers in `frontend/tests/unit/thread-storage.test.ts`
-- [ ] T022 [P] [US1] Add unit tests for full-history request shaping in `frontend/tests/unit/thread-state.test.ts`
+- [X] T020 [P] [US1] Add unit tests for blank-message validation in `frontend/tests/unit/chat-validation.test.ts`
+- [X] T021 [P] [US1] Add unit tests for session snapshot save/load helpers in `frontend/tests/unit/thread-storage.test.ts`
+- [X] T022 [P] [US1] Add unit tests for full-history request shaping in `frontend/tests/unit/thread-state.test.ts`
 - [X] T023 [P] [US1] Add unit tests for reply-mode selection in `backend/tests/unit/reply-provider.test.ts`
 - [X] T024 [P] [US1] Add integration test for chat SSE stream contract in `backend/tests/integration/chat-stream.test.ts`
-- [ ] T025 [P] [US1] Define `ChatThread` and `Message` types in `shared/src/types/chat-thread.ts`
-- [ ] T026 [P] [US1] Implement blank-message validation helper in `frontend/src/chat/validation.ts`
-- [ ] T027 [P] [US1] Implement session snapshot save/load helpers in `frontend/src/session/thread-storage.ts`
+- [X] T025 [P] [US1] Define `ChatThread` and `Message` types in `shared/src/types/chat-thread.ts`
+- [X] T026 [P] [US1] Implement blank-message validation helper in `frontend/src/chat/validation.ts`
+- [X] T027 [P] [US1] Implement session snapshot save/load helpers in `frontend/src/session/thread-storage.ts`
 - [X] T028 [P] [US1] Implement deterministic mock reply adapter in `backend/src/chat/mock-agent.ts`
 - [X] T029 [P] [US1] Implement optional Vercel AI SDK reply adapter in `backend/src/chat/llm-agent.ts`
 - [X] T030 [US1] Implement reply-mode selector in `backend/src/chat/reply-provider.ts`
 - [X] T031 [US1] Implement SSE stream event builder in `backend/src/chat/stream-events.ts`
 - [X] T032 [US1] Implement `POST /api/v1/chat` route in `backend/src/chat/chat-route.ts`
-- [ ] T033 [US1] Implement chat request client with SSE parsing in `frontend/src/chat/chat-client.ts`
-- [ ] T034 [US1] Implement thread state manager in `frontend/src/chat/thread-state.ts`
-- [ ] T035 [P] [US1] Implement message list renderer with streaming-complete and failed states in `frontend/src/ui/message-list.ts`
-- [ ] T036 [P] [US1] Implement chat input and validation UI for Traditional Chinese message entry in `frontend/src/ui/chat-input.ts`
-- [ ] T037 [US1] Implement chat page composition in `frontend/src/ui/chat-page.ts`
-- [ ] T038 [US1] Wire chat bootstrap, restore, and submit handlers in `frontend/src/main.ts`
-- [ ] T039 [US1] Implement user-visible stream failure handling that preserves partial assistant output and submitted user messages in `frontend/src/ui/error-state.ts`
+- [X] T033 [US1] Implement chat request client with SSE parsing in `frontend/src/chat/chat-client.ts`
+- [X] T034 [US1] Implement thread state manager in `frontend/src/chat/thread-state.ts`
+- [X] T035 [P] [US1] Implement message list renderer with streaming-complete and failed states in `frontend/src/ui/message-list.ts`
+- [X] T036 [P] [US1] Implement chat input and validation UI for Traditional Chinese message entry in `frontend/src/ui/chat-input.ts`
+- [X] T037 [US1] Implement chat page composition in `frontend/src/ui/chat-page.ts`
+- [X] T038 [US1] Wire chat bootstrap, restore, and submit handlers in `frontend/src/main.ts`
+- [X] T039 [US1] Implement user-visible stream failure handling that preserves partial assistant output and submitted user messages in `frontend/src/ui/error-state.ts`
 
 **Checkpoint**: User Story 1 should be fully functional and testable independently
 
@@ -119,7 +119,7 @@ process-only top-level health when Vercel AI SDK provider mode is enabled.
 - [X] T042 [P] [US2] Implement shallow `/health` route in `backend/src/status/health-route.ts`
 - [X] T043 [P] [US2] Implement typed `/status` route with healthy/degraded service reporting in `backend/src/status/status-route.ts`
 - [X] T044 [US2] Register health and status routes in `backend/src/api/routes.ts`
-- [ ] T045 [US2] Implement frontend status probe helper in `frontend/src/status/status-client.ts`
+- [X] T045 [US2] Implement frontend status probe helper in `frontend/src/status/status-client.ts`
 
 **Checkpoint**: User Stories 1 and 2 should both work independently
 
@@ -136,10 +136,10 @@ backend location.
 
 ### Implementation for User Story 3
 
-- [ ] T046 [P] [US3] Document environment variables in `.env.example`
-- [ ] T047 [US3] Inject `FRONTEND_BACKEND_URL` into frontend runtime config in `frontend/vite.config.ts`
-- [ ] T048 [US3] Ensure chat and status clients read configured endpoint from `frontend/src/config/backend-endpoint.ts`
-- [ ] T049 [US3] Add startup handling for missing or malformed backend URL in `frontend/src/main.ts`
+- [X] T046 [P] [US3] Document environment variables in `.env.example`
+- [X] T047 [US3] Inject `FRONTEND_BACKEND_URL` into frontend runtime config in `frontend/vite.config.ts`
+- [X] T048 [US3] Ensure chat and status clients read configured endpoint from `frontend/src/config/backend-endpoint.ts`
+- [X] T049 [US3] Add startup handling for missing or malformed backend URL in `frontend/src/main.ts`
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -149,10 +149,10 @@ backend location.
 
 **Purpose**: Documentation, command discoverability, and end-to-end validation
 
-- [ ] T050 [P] Document canonical npm commands and environment setup in `README.md`
-- [ ] T051 [P] Add browser-level smoke validation for refresh restore in `frontend/tests/integration/chat-refresh.test.ts`
-- [ ] T052 Validate all scenarios in `specs/001-agent-chat-app/quickstart.md`, including confirming first streamed output appears within 2 seconds in mock mode
-- [ ] T053 [P] Verify contract alignment against `specs/001-agent-chat-app/contracts/http-api.yaml`
+- [X] T050 [P] Document canonical npm commands and environment setup in `README.md`
+- [X] T051 [P] Add browser-level smoke validation for refresh restore in `frontend/tests/integration/chat-refresh.test.ts`
+- [X] T052 Validate all scenarios in `specs/001-agent-chat-app/quickstart.md`, including confirming first streamed output appears within 2 seconds in mock mode
+- [X] T053 [P] Verify contract alignment against `specs/001-agent-chat-app/contracts/http-api.yaml`
 
 ---
 

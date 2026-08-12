@@ -2,8 +2,11 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    environment: "node",
-    include: ["backend/tests/**/*.test.ts"],
+    environmentMatchGlobs: [
+      ["backend/tests/**/*.test.ts", "node"],
+      ["frontend/tests/**/*.test.ts", "jsdom"],
+    ],
+    include: ["backend/tests/**/*.test.ts", "frontend/tests/**/*.test.ts"],
     reporters: ["default"],
   },
 });

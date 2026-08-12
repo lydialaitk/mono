@@ -1,10 +1,11 @@
 import { type ChatMessage } from "./types";
 
-export function generateVercelAIReply(_messages: ChatMessage[]): { text: string } {
+export function generateVercelAIReply(messages: ChatMessage[]): { text: string } {
   // v1 backend is mock-first. Real provider integration is intentionally
   // configuration-gated and can be filled in later.
   //
   // This function exists so the boundary and selection logic is explicit.
+  void messages;
   const providerConfigured =
     process.env.VERCEL_AI_SDK_API_KEY ||
     process.env.VERCEL_AI_API_KEY ||
