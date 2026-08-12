@@ -62,20 +62,22 @@ chat app.
 check reduces ambiguity during setup and troubleshooting.
 
 **Independent Test**: Can be tested independently by requesting the backend
-status endpoint and confirming that it returns a machine-readable healthy or
-unhealthy result.
+status endpoints and confirming that `/health` reports backend process
+availability while `/status` returns a machine-readable healthy, degraded, or
+unhealthy service result as appropriate.
 
 **Acceptance Scenarios**:
 
 1. **Given** the backend service is running normally, **When** a caller requests
-   the status endpoint, **Then** the response indicates the service is healthy.
+   `/health` and `/status`, **Then** `/health` reports the backend process as
+   available and `/status` reports the service as healthy.
 2. **Given** the backend cannot process chat requests, **When** a caller requests
-   the status endpoint, **Then** the response makes the degraded or unavailable
-   state detectable.
+   `/status`, **Then** the response makes the degraded or unavailable state
+   detectable even when the backend process is still running.
 3. **Given** the backend process is running but the real LLM is misconfigured or
-   unreachable, **When** a caller requests the status endpoint, **Then** the
-   response still reports the backend process itself as healthy while exposing
-   enough status detail to distinguish the active mode and configuration state.
+   unreachable, **When** a caller requests `/health` and `/status`, **Then**
+   `/health` still reports the backend process itself as healthy while `/status`
+   exposes the active mode and degraded configuration state.
 
 ---
 
@@ -106,7 +108,8 @@ checks are directed to that location.
 ### Edge Cases
 
 - What happens when the backend becomes unavailable after the user submits a
-  message but before the streamed reply completes?
+  message but before the streamed reply completes, including how the partial
+  assistant response is preserved and marked as failed?
 - How does the interface present validation feedback for an empty or
   whitespace-only message while keeping the existing thread unchanged?
 - What happens when the configured backend endpoint is missing, malformed, or
@@ -159,6 +162,14 @@ checks are directed to that location.
 - **FR-013**: When the backend is in real LLM mode, the status endpoint MUST make
   configuration or upstream readiness issues inspectable without redefining the
   top-level healthy signal away from backend process health.
+- **FR-014**: The `/status` endpoint MUST represent reply-generation impairment as
+  a degraded or unavailable service state even when `/health` continues to report
+  backend process availability.
+- **FR-015**: When a streamed reply completes successfully, the UI MUST stop any
+  in-progress indicator and visibly mark the assistant reply as complete.
+- **FR-016**: When a streamed reply fails after partial output has been shown, the
+  system MUST preserve the user's submitted message, preserve the partial
+  assistant output already shown, and mark that assistant reply as failed.
 
 ### Key Entities *(include if feature involves data)*
 

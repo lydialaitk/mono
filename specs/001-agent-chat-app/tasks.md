@@ -8,8 +8,9 @@ description: "Task list for 繁體中文 Agent Chat App implementation"
 
 **Prerequisites**: plan.md, spec.md, research.md, data-model.md, contracts/, quickstart.md
 
-**Tests**: Not explicitly requested in the feature specification. This task list
-focuses on implementation tasks only. Add test tasks later if TDD is desired.
+**Tests**: Constitution-required unit and integration tests are included for pure
+logic and boundary behavior. Full TDD sequencing is not mandated by the feature
+spec, but these tests must be implemented before the feature is considered done.
 
 **Organization**: Tasks are grouped by user story to enable independent
 implementation and testing of each story.
@@ -39,6 +40,7 @@ implementation and testing of each story.
 - [ ] T006 [P] Configure TypeScript project references in `tsconfig.json`, `backend/tsconfig.json`, `frontend/tsconfig.json`, and `shared/tsconfig.json`
 - [ ] T007 [P] Configure linting and formatting in `eslint.config.js` and `.prettierignore`
 - [ ] T008 Create frontend HTML shell in `frontend/public/index.html` and entry stub in `frontend/src/main.ts`
+- [ ] T009 [P] Create CI parity workflow that runs `npm run check` in `.github/workflows/check.yml`
 
 ---
 
@@ -48,15 +50,16 @@ implementation and testing of each story.
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T009 Define shared chat contract types in `shared/src/contracts/chat.ts`
-- [ ] T010 [P] Define shared status contract types in `shared/src/contracts/status.ts`
-- [ ] T011 [P] Define shared stream event types in `shared/src/events/stream-event.ts`
-- [ ] T012 Implement backend configuration loader in `backend/src/app/config.ts`
-- [ ] T013 [P] Implement structured telemetry event helper in `backend/src/telemetry/events.ts`
-- [ ] T014 Implement Fastify server bootstrap in `backend/src/app/server.ts`
-- [ ] T015 Create API route registration shell in `backend/src/api/routes.ts`
-- [ ] T016 [P] Implement frontend backend-endpoint config loader in `frontend/src/config/backend-endpoint.ts`
-- [ ] T017 Wire server entrypoint and static asset serving in `backend/src/app/main.ts`
+- [ ] T010 Define shared chat contract types in `shared/src/contracts/chat.ts`
+- [ ] T011 [P] Define shared status contract types in `shared/src/contracts/status.ts`
+- [ ] T012 [P] Define shared stream event types in `shared/src/events/stream-event.ts`
+- [ ] T013 Implement backend configuration loader in `backend/src/app/config.ts`
+- [ ] T014 [P] Implement structured telemetry event helper in `backend/src/telemetry/events.ts`
+- [ ] T015 Implement Fastify server bootstrap in `backend/src/app/server.ts`
+- [ ] T016 Create API route registration shell in `backend/src/api/routes.ts`
+- [ ] T017 [P] Implement frontend backend-endpoint config loader in `frontend/src/config/backend-endpoint.ts`
+- [ ] T018 Wire server entrypoint and static asset serving in `backend/src/app/main.ts`
+- [ ] T019 [P] Add Vitest workspace wiring and `npm run check` test hooks in `vitest.config.ts` and root `package.json`
 
 **Checkpoint**: Foundation ready — user story implementation can now begin
 
@@ -75,21 +78,26 @@ thread is restored.
 
 ### Implementation for User Story 1
 
-- [ ] T018 [P] [US1] Define `ChatThread` and `Message` types in `shared/src/types/chat-thread.ts`
-- [ ] T019 [P] [US1] Implement blank-message validation helper in `frontend/src/chat/validation.ts`
-- [ ] T020 [P] [US1] Implement session snapshot save/load helpers in `frontend/src/session/thread-storage.ts`
-- [ ] T021 [P] [US1] Implement deterministic mock reply adapter in `backend/src/chat/mock-agent.ts`
-- [ ] T022 [P] [US1] Implement optional real LLM reply adapter in `backend/src/chat/llm-agent.ts`
-- [ ] T023 [US1] Implement reply-mode selector in `backend/src/chat/reply-provider.ts`
-- [ ] T024 [US1] Implement SSE stream event builder in `backend/src/chat/stream-events.ts`
-- [ ] T025 [US1] Implement `POST /api/v1/chat` route in `backend/src/chat/chat-route.ts`
-- [ ] T026 [US1] Implement chat request client with SSE parsing in `frontend/src/chat/chat-client.ts`
-- [ ] T027 [US1] Implement thread state manager in `frontend/src/chat/thread-state.ts`
-- [ ] T028 [P] [US1] Implement message list renderer in `frontend/src/ui/message-list.ts`
-- [ ] T029 [P] [US1] Implement chat input and validation UI in `frontend/src/ui/chat-input.ts`
-- [ ] T030 [US1] Implement chat page composition in `frontend/src/ui/chat-page.ts`
-- [ ] T031 [US1] Wire chat bootstrap, restore, and submit handlers in `frontend/src/main.ts`
-- [ ] T032 [US1] Implement user-visible stream failure states in `frontend/src/ui/error-state.ts`
+- [ ] T020 [P] [US1] Add unit tests for blank-message validation in `frontend/tests/unit/chat-validation.test.ts`
+- [ ] T021 [P] [US1] Add unit tests for session snapshot save/load helpers in `frontend/tests/unit/thread-storage.test.ts`
+- [ ] T022 [P] [US1] Add unit tests for full-history request shaping in `frontend/tests/unit/thread-state.test.ts`
+- [ ] T023 [P] [US1] Add unit tests for reply-mode selection in `backend/tests/unit/reply-provider.test.ts`
+- [ ] T024 [P] [US1] Add integration test for chat SSE stream contract in `backend/tests/integration/chat-stream.test.ts`
+- [ ] T025 [P] [US1] Define `ChatThread` and `Message` types in `shared/src/types/chat-thread.ts`
+- [ ] T026 [P] [US1] Implement blank-message validation helper in `frontend/src/chat/validation.ts`
+- [ ] T027 [P] [US1] Implement session snapshot save/load helpers in `frontend/src/session/thread-storage.ts`
+- [ ] T028 [P] [US1] Implement deterministic mock reply adapter in `backend/src/chat/mock-agent.ts`
+- [ ] T029 [P] [US1] Implement optional real LLM reply adapter in `backend/src/chat/llm-agent.ts`
+- [ ] T030 [US1] Implement reply-mode selector in `backend/src/chat/reply-provider.ts`
+- [ ] T031 [US1] Implement SSE stream event builder in `backend/src/chat/stream-events.ts`
+- [ ] T032 [US1] Implement `POST /api/v1/chat` route in `backend/src/chat/chat-route.ts`
+- [ ] T033 [US1] Implement chat request client with SSE parsing in `frontend/src/chat/chat-client.ts`
+- [ ] T034 [US1] Implement thread state manager in `frontend/src/chat/thread-state.ts`
+- [ ] T035 [P] [US1] Implement message list renderer with streaming-complete and failed states in `frontend/src/ui/message-list.ts`
+- [ ] T036 [P] [US1] Implement chat input and validation UI for Traditional Chinese message entry in `frontend/src/ui/chat-input.ts`
+- [ ] T037 [US1] Implement chat page composition in `frontend/src/ui/chat-page.ts`
+- [ ] T038 [US1] Wire chat bootstrap, restore, and submit handlers in `frontend/src/main.ts`
+- [ ] T039 [US1] Implement user-visible stream failure handling that preserves partial assistant output and submitted user messages in `frontend/src/ui/error-state.ts`
 
 **Checkpoint**: User Story 1 should be fully functional and testable independently
 
@@ -106,10 +114,12 @@ process-only top-level health when real LLM mode is enabled.
 
 ### Implementation for User Story 2
 
-- [ ] T033 [P] [US2] Implement shallow `/health` route in `backend/src/status/health-route.ts`
-- [ ] T034 [P] [US2] Implement typed `/status` route in `backend/src/status/status-route.ts`
-- [ ] T035 [US2] Register health and status routes in `backend/src/api/routes.ts`
-- [ ] T036 [US2] Implement frontend status probe helper in `frontend/src/status/status-client.ts`
+- [ ] T040 [P] [US2] Add integration test for `/health` process-only semantics in `backend/tests/integration/health-route.test.ts`
+- [ ] T041 [P] [US2] Add integration test for `/status` healthy/degraded service semantics in `backend/tests/integration/status-route.test.ts`
+- [ ] T042 [P] [US2] Implement shallow `/health` route in `backend/src/status/health-route.ts`
+- [ ] T043 [P] [US2] Implement typed `/status` route with healthy/degraded service reporting in `backend/src/status/status-route.ts`
+- [ ] T044 [US2] Register health and status routes in `backend/src/api/routes.ts`
+- [ ] T045 [US2] Implement frontend status probe helper in `frontend/src/status/status-client.ts`
 
 **Checkpoint**: User Stories 1 and 2 should both work independently
 
@@ -126,10 +136,10 @@ backend location.
 
 ### Implementation for User Story 3
 
-- [ ] T037 [P] [US3] Document environment variables in `.env.example`
-- [ ] T038 [US3] Inject `FRONTEND_BACKEND_URL` into frontend runtime config in `frontend/vite.config.ts`
-- [ ] T039 [US3] Ensure chat and status clients read configured endpoint from `frontend/src/config/backend-endpoint.ts`
-- [ ] T040 [US3] Add startup handling for missing or malformed backend URL in `frontend/src/main.ts`
+- [ ] T046 [P] [US3] Document environment variables in `.env.example`
+- [ ] T047 [US3] Inject `FRONTEND_BACKEND_URL` into frontend runtime config in `frontend/vite.config.ts`
+- [ ] T048 [US3] Ensure chat and status clients read configured endpoint from `frontend/src/config/backend-endpoint.ts`
+- [ ] T049 [US3] Add startup handling for missing or malformed backend URL in `frontend/src/main.ts`
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -139,10 +149,10 @@ backend location.
 
 **Purpose**: Documentation, command discoverability, and end-to-end validation
 
-- [ ] T041 [P] Document canonical npm commands and environment setup in `README.md`
-- [ ] T042 [P] Add Vitest workspace wiring in `vitest.config.ts` and root `package.json` test scripts
-- [ ] T043 Validate all scenarios in `specs/001-agent-chat-app/quickstart.md`
-- [ ] T044 [P] Verify contract alignment against `specs/001-agent-chat-app/contracts/http-api.yaml`
+- [ ] T050 [P] Document canonical npm commands and environment setup in `README.md`
+- [ ] T051 [P] Add browser-level smoke validation for refresh restore in `frontend/tests/integration/chat-refresh.test.ts`
+- [ ] T052 Validate all scenarios in `specs/001-agent-chat-app/quickstart.md`, including confirming first streamed output appears within 2 seconds in mock mode
+- [ ] T053 [P] Verify contract alignment against `specs/001-agent-chat-app/contracts/http-api.yaml`
 
 ---
 
@@ -172,12 +182,12 @@ backend location.
 
 ### Parallel Opportunities
 
-- Phase 1 tasks T003–T007 can run in parallel after T001–T002
-- Phase 2 tasks T010–T011 and T016 can run in parallel after T009
-- US1 tasks T018–T022 and T028–T029 can run in parallel before integration tasks T023–T031
-- US2 tasks T033–T034 can run in parallel
-- US3 task T037 can run in parallel with T038–T040 prep
-- Polish tasks T041, T042, and T044 can run in parallel
+- Phase 1 tasks T003–T007 and T009 can run in parallel after T001–T002
+- Phase 2 tasks T011–T012, T014, T017, and T019 can run in parallel after T010
+- US1 tasks T020–T025 and T035–T036 can run in parallel before integration tasks T030–T039
+- US2 tasks T040–T043 can run in parallel
+- US3 task T046 can run in parallel with T047–T049 prep
+- Polish tasks T050, T051, and T053 can run in parallel
 
 ---
 
@@ -188,6 +198,7 @@ backend location.
 Task: "Implement deterministic mock reply adapter in backend/src/chat/mock-agent.ts"
 Task: "Implement optional real LLM reply adapter in backend/src/chat/llm-agent.ts"
 Task: "Implement session snapshot save/load helpers in frontend/src/session/thread-storage.ts"
+Task: "Add integration test for chat SSE stream contract in backend/tests/integration/chat-stream.test.ts"
 
 # Launch independent US1 UI pieces together:
 Task: "Implement message list renderer in frontend/src/ui/message-list.ts"
@@ -203,7 +214,7 @@ Task: "Implement chat input and validation UI in frontend/src/ui/chat-input.ts"
 1. Complete Phase 1: Setup
 2. Complete Phase 2: Foundational
 3. Complete Phase 3: User Story 1
-4. **STOP and VALIDATE**: Run quickstart scenarios 1–3 for streaming, validation, and refresh restore
+4. **STOP and VALIDATE**: Run US1 unit/integration tests plus quickstart scenarios 1–3 for streaming, validation, and refresh restore
 5. Demo the MVP before adding status and config polish
 
 ### Incremental Delivery
@@ -212,7 +223,7 @@ Task: "Implement chat input and validation UI in frontend/src/ui/chat-input.ts"
 2. Add User Story 1 → validate streaming chat MVP
 3. Add User Story 2 → validate `/health` and `/status`
 4. Add User Story 3 → validate environment-based backend targeting
-5. Run Polish phase and full quickstart validation
+5. Run Polish phase, CI parity check, and full quickstart validation
 
 ### Parallel Team Strategy
 
