@@ -18,7 +18,6 @@ export function emitTelemetry(event: Omit<TelemetryEvent, "at">): void {
     ...event,
     at: new Date().toISOString(),
   };
-  // eslint-disable-next-line no-console
   console.log(JSON.stringify(payload));
 }
 
