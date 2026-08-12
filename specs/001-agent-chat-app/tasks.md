@@ -87,7 +87,7 @@ thread is restored.
 - [ ] T026 [P] [US1] Implement blank-message validation helper in `frontend/src/chat/validation.ts`
 - [ ] T027 [P] [US1] Implement session snapshot save/load helpers in `frontend/src/session/thread-storage.ts`
 - [ ] T028 [P] [US1] Implement deterministic mock reply adapter in `backend/src/chat/mock-agent.ts`
-- [ ] T029 [P] [US1] Implement optional real LLM reply adapter in `backend/src/chat/llm-agent.ts`
+- [ ] T029 [P] [US1] Implement optional Vercel AI SDK reply adapter in `backend/src/chat/llm-agent.ts`
 - [ ] T030 [US1] Implement reply-mode selector in `backend/src/chat/reply-provider.ts`
 - [ ] T031 [US1] Implement SSE stream event builder in `backend/src/chat/stream-events.ts`
 - [ ] T032 [US1] Implement `POST /api/v1/chat` route in `backend/src/chat/chat-route.ts`
@@ -110,7 +110,7 @@ service status, including reply mode and configuration details.
 
 **Independent Test**: Request `/health` and `/status` and confirm machine-readable
 responses match `specs/001-agent-chat-app/contracts/http-api.yaml`, including
-process-only top-level health when real LLM mode is enabled.
+process-only top-level health when Vercel AI SDK provider mode is enabled.
 
 ### Implementation for User Story 2
 
@@ -196,7 +196,7 @@ backend location.
 ```bash
 # Launch independent US1 backend pieces together:
 Task: "Implement deterministic mock reply adapter in backend/src/chat/mock-agent.ts"
-Task: "Implement optional real LLM reply adapter in backend/src/chat/llm-agent.ts"
+Task: "Implement optional Vercel AI SDK reply adapter in backend/src/chat/llm-agent.ts"
 Task: "Implement session snapshot save/load helpers in frontend/src/session/thread-storage.ts"
 Task: "Add integration test for chat SSE stream contract in backend/tests/integration/chat-stream.test.ts"
 
