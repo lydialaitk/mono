@@ -32,9 +32,9 @@ implementation and testing of each story.
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create repository layout directories `backend/`, `frontend/`, and `shared/` per `specs/001-agent-chat-app/plan.md`
-- [ ] T002 Initialize root `package.json` with npm workspaces and scripts `dev`, `build`, `start`, `test`, `lint`, and `check`
-- [ ] T003 [P] Initialize backend package manifest and dependencies in `backend/package.json`
+- [X] T001 Create repository layout directories `backend/`, `frontend/`, and `shared/` per `specs/001-agent-chat-app/plan.md`
+- [X] T002 Initialize root `package.json` with npm workspaces and scripts `dev`, `build`, `start`, `test`, `lint`, and `check`
+- [X] T003 [P] Initialize backend package manifest and dependencies in `backend/package.json`
 - [ ] T004 [P] Initialize frontend package manifest and Vite dependencies in `frontend/package.json`
 - [ ] T005 [P] Initialize shared package manifest in `shared/package.json`
 - [ ] T006 [P] Configure TypeScript project references in `tsconfig.json`, `backend/tsconfig.json`, `frontend/tsconfig.json`, and `shared/tsconfig.json`
@@ -53,13 +53,13 @@ implementation and testing of each story.
 - [ ] T010 Define shared chat contract types in `shared/src/contracts/chat.ts`
 - [ ] T011 [P] Define shared status contract types in `shared/src/contracts/status.ts`
 - [ ] T012 [P] Define shared stream event types in `shared/src/events/stream-event.ts`
-- [ ] T013 Implement backend configuration loader in `backend/src/app/config.ts`
-- [ ] T014 [P] Implement structured telemetry event helper in `backend/src/telemetry/events.ts`
-- [ ] T015 Implement Fastify server bootstrap in `backend/src/app/server.ts`
-- [ ] T016 Create API route registration shell in `backend/src/api/routes.ts`
+- [X] T013 Implement backend configuration loader in `backend/src/app/config.ts`
+- [X] T014 [P] Implement structured telemetry event helper in `backend/src/telemetry/events.ts`
+- [X] T015 Implement Fastify server bootstrap in `backend/src/app/server.ts`
+- [X] T016 Create API route registration shell in `backend/src/api/routes.ts`
 - [ ] T017 [P] Implement frontend backend-endpoint config loader in `frontend/src/config/backend-endpoint.ts`
-- [ ] T018 Wire server entrypoint and static asset serving in `backend/src/app/main.ts`
-- [ ] T019 [P] Add Vitest workspace wiring and `npm run check` test hooks in `vitest.config.ts` and root `package.json`
+- [X] T018 Wire server entrypoint and static asset serving in `backend/src/app/main.ts`
+- [X] T019 [P] Add Vitest workspace wiring and `npm run check` test hooks in `vitest.config.ts` and root `package.json`
 
 **Checkpoint**: Foundation ready — user story implementation can now begin
 
@@ -81,16 +81,16 @@ thread is restored.
 - [ ] T020 [P] [US1] Add unit tests for blank-message validation in `frontend/tests/unit/chat-validation.test.ts`
 - [ ] T021 [P] [US1] Add unit tests for session snapshot save/load helpers in `frontend/tests/unit/thread-storage.test.ts`
 - [ ] T022 [P] [US1] Add unit tests for full-history request shaping in `frontend/tests/unit/thread-state.test.ts`
-- [ ] T023 [P] [US1] Add unit tests for reply-mode selection in `backend/tests/unit/reply-provider.test.ts`
-- [ ] T024 [P] [US1] Add integration test for chat SSE stream contract in `backend/tests/integration/chat-stream.test.ts`
+- [X] T023 [P] [US1] Add unit tests for reply-mode selection in `backend/tests/unit/reply-provider.test.ts`
+- [X] T024 [P] [US1] Add integration test for chat SSE stream contract in `backend/tests/integration/chat-stream.test.ts`
 - [ ] T025 [P] [US1] Define `ChatThread` and `Message` types in `shared/src/types/chat-thread.ts`
 - [ ] T026 [P] [US1] Implement blank-message validation helper in `frontend/src/chat/validation.ts`
 - [ ] T027 [P] [US1] Implement session snapshot save/load helpers in `frontend/src/session/thread-storage.ts`
-- [ ] T028 [P] [US1] Implement deterministic mock reply adapter in `backend/src/chat/mock-agent.ts`
-- [ ] T029 [P] [US1] Implement optional Vercel AI SDK reply adapter in `backend/src/chat/llm-agent.ts`
-- [ ] T030 [US1] Implement reply-mode selector in `backend/src/chat/reply-provider.ts`
-- [ ] T031 [US1] Implement SSE stream event builder in `backend/src/chat/stream-events.ts`
-- [ ] T032 [US1] Implement `POST /api/v1/chat` route in `backend/src/chat/chat-route.ts`
+- [X] T028 [P] [US1] Implement deterministic mock reply adapter in `backend/src/chat/mock-agent.ts`
+- [X] T029 [P] [US1] Implement optional Vercel AI SDK reply adapter in `backend/src/chat/llm-agent.ts`
+- [X] T030 [US1] Implement reply-mode selector in `backend/src/chat/reply-provider.ts`
+- [X] T031 [US1] Implement SSE stream event builder in `backend/src/chat/stream-events.ts`
+- [X] T032 [US1] Implement `POST /api/v1/chat` route in `backend/src/chat/chat-route.ts`
 - [ ] T033 [US1] Implement chat request client with SSE parsing in `frontend/src/chat/chat-client.ts`
 - [ ] T034 [US1] Implement thread state manager in `frontend/src/chat/thread-state.ts`
 - [ ] T035 [P] [US1] Implement message list renderer with streaming-complete and failed states in `frontend/src/ui/message-list.ts`
@@ -114,11 +114,11 @@ process-only top-level health when Vercel AI SDK provider mode is enabled.
 
 ### Implementation for User Story 2
 
-- [ ] T040 [P] [US2] Add integration test for `/health` process-only semantics in `backend/tests/integration/health-route.test.ts`
-- [ ] T041 [P] [US2] Add integration test for `/status` healthy/degraded service semantics in `backend/tests/integration/status-route.test.ts`
-- [ ] T042 [P] [US2] Implement shallow `/health` route in `backend/src/status/health-route.ts`
-- [ ] T043 [P] [US2] Implement typed `/status` route with healthy/degraded service reporting in `backend/src/status/status-route.ts`
-- [ ] T044 [US2] Register health and status routes in `backend/src/api/routes.ts`
+- [X] T040 [P] [US2] Add integration test for `/health` process-only semantics in `backend/tests/integration/health-route.test.ts`
+- [X] T041 [P] [US2] Add integration test for `/status` healthy/degraded service semantics in `backend/tests/integration/status-route.test.ts`
+- [X] T042 [P] [US2] Implement shallow `/health` route in `backend/src/status/health-route.ts`
+- [X] T043 [P] [US2] Implement typed `/status` route with healthy/degraded service reporting in `backend/src/status/status-route.ts`
+- [X] T044 [US2] Register health and status routes in `backend/src/api/routes.ts`
 - [ ] T045 [US2] Implement frontend status probe helper in `frontend/src/status/status-client.ts`
 
 **Checkpoint**: User Stories 1 and 2 should both work independently

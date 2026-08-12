@@ -1,0 +1,23 @@
+{
+  "name": "mono",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend",
+    "shared"
+  ],
+  "type": "commonjs",
+  "scripts": {
+    "dev": "npm -w backend run dev",
+    "build": "npm -w backend run build",
+    "start": "node backend/dist/src/app/main.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "echo \"(lint not configured yet)\"",
+    "check": "npm run test && npm run build"
+  },
+  "devDependencies": {
+    "vitest": "^3.0.0"
+  }
+}
+
