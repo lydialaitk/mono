@@ -15,6 +15,7 @@
 - Q: What should generate the assistant replies in v1? → A: Configurable — mock by default; use real LLM when API credentials are provided
 - Q: When the user sends a follow-up message in the same thread, should the backend agent receive the full conversation history or only the latest message? → A: Full in-session history
 - Q: After the user refreshes the page, what should happen to the single chat thread in v1? → A: Restore the current thread after refresh within the same browser session
+- Q: What should the backend status endpoint mean in v1 when real LLM mode is enabled? → A: Process only
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -70,6 +71,10 @@ unhealthy result.
 2. **Given** the backend cannot process chat requests, **When** a caller requests
    the status endpoint, **Then** the response makes the degraded or unavailable
    state detectable.
+3. **Given** the backend process is running but the real LLM is misconfigured or
+   unreachable, **When** a caller requests the status endpoint, **Then** the
+   response still reports the backend process itself as healthy while exposing
+   enough status detail to distinguish the active mode and configuration state.
 
 ---
 
@@ -130,6 +135,9 @@ checks are directed to that location.
   thread even if the backend reply fails or is interrupted.
 - **FR-006**: The system MUST expose a backend health or status endpoint that
   allows callers to determine whether the backend is available to serve requests.
+- **FR-006a**: In v1, the status endpoint's primary healthy or unhealthy signal
+  MUST reflect backend process availability, not successful completion of an
+  upstream LLM request.
 - **FR-007**: The system MUST allow the frontend's backend endpoint to be set
   through environment-based configuration without requiring frontend code changes.
 - **FR-008**: The system MUST provide a user-visible failure state when a message
@@ -144,6 +152,9 @@ checks are directed to that location.
   instead of the mock agent.
 - **FR-012**: The status endpoint MUST indicate whether the backend is operating
   in mock mode or real LLM mode.
+- **FR-013**: When the backend is in real LLM mode, the status endpoint MUST make
+  configuration or upstream readiness issues inspectable without redefining the
+  top-level healthy signal away from backend process health.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -156,7 +167,8 @@ checks are directed to that location.
 - **Backend Endpoint Configuration**: The runtime-selected backend location used
   by the frontend to send chat requests and check backend status.
 - **Service Status Result**: A machine-readable status response that communicates
-  whether the backend is able to serve chat traffic.
+  whether the backend process is up, which reply mode is active, and any
+  inspectable configuration or upstream readiness issues relevant to that mode.
 
 ## Success Criteria *(mandatory)*
 
