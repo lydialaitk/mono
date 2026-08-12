@@ -14,6 +14,7 @@
 
 - Q: What should generate the assistant replies in v1? → A: Configurable — mock by default; use real LLM when API credentials are provided
 - Q: When the user sends a follow-up message in the same thread, should the backend agent receive the full conversation history or only the latest message? → A: Full in-session history
+- Q: After the user refreshes the page, what should happen to the single chat thread in v1? → A: Restore the current thread after refresh within the same browser session
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -43,6 +44,9 @@ appears progressively in the same chat thread.
 3. **Given** the thread already contains earlier user and assistant messages,
    **When** the user sends a follow-up message, **Then** the backend receives the
    full in-session conversation history so the reply can use prior context.
+4. **Given** the user refreshes the page during the same browser session,
+   **When** the chat page reloads, **Then** the existing single thread is restored
+   so the user can continue the conversation without starting over.
 
 ---
 
@@ -101,8 +105,8 @@ checks are directed to that location.
   whitespace?
 - What happens when the configured backend endpoint is missing, malformed, or
   unreachable at startup?
-- How does the interface behave if the user refreshes the page, given v1 supports
-  only a single in-memory thread and no persistence?
+- What happens if the browser session ends after the page was previously refreshed
+  and the user returns later?
 
 ## Requirements *(mandatory)*
 
@@ -112,6 +116,8 @@ checks are directed to that location.
   and submit a message written in Traditional Chinese.
 - **FR-002**: The system MUST maintain exactly one chat thread for v1 and display
   messages for that thread in chronological order.
+- **FR-002a**: The system MUST restore the current single chat thread after a page
+  refresh within the same browser session.
 - **FR-003**: The system MUST send each submitted user message to the backend
   agent and begin returning the assistant reply incrementally rather than only
   after the full reply is complete.
@@ -143,7 +149,8 @@ checks are directed to that location.
 
 - **Chat Thread**: The single active conversation shown to the user, containing
   an ordered list of user and assistant messages for the current session, and
-  the same ordered history is the context sent with each follow-up request.
+  the same ordered history is the context sent with each follow-up request and
+  restored after refresh within the same browser session.
 - **Message**: A chat item authored by either the user or the assistant, with
   content, author role, lifecycle state, and display order in the thread.
 - **Backend Endpoint Configuration**: The runtime-selected backend location used
@@ -173,8 +180,9 @@ checks are directed to that location.
   use.
 - The primary user can read and write Traditional Chinese and interacts through a
   desktop-class web browser.
-- Conversation history only needs to exist for the current running session; it
-  does not need to survive refreshes, restarts, or browser closure.
+- Conversation history must survive page refreshes within the same browser
+  session, but it does not need to survive browser-session end, app restarts, or
+  browser closure.
 - A single active thread means the user cannot create, switch, rename, or delete
   multiple conversations in v1.
 - Without external LLM credentials, the backend uses a mock agent that produces
