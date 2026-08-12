@@ -12,10 +12,13 @@
 
 ### Session 2026-08-12
 
-- Q: What should generate the assistant replies in v1? → A: Configurable — mock by default; use real LLM when API credentials are provided
+- Q: What should generate the assistant replies in v1? → A: Configurable — mock by
+  default; use a real LLM provider (Vercel AI SDK) when provider credentials
+  are provided
 - Q: When the user sends a follow-up message in the same thread, should the backend agent receive the full conversation history or only the latest message? → A: Full in-session history
 - Q: After the user refreshes the page, what should happen to the single chat thread in v1? → A: Restore the current thread after refresh within the same browser session
-- Q: What should the backend status endpoint mean in v1 when real LLM mode is enabled? → A: Process only
+- Q: What should the backend status endpoint mean in v1 when real LLM provider
+  mode (Vercel AI SDK) is enabled? → A: Process only
 - Q: How should the app handle an empty or whitespace-only message? → A: Block submission and show a validation message
 
 ## User Scenarios & Testing *(mandatory)*
@@ -74,10 +77,11 @@ unhealthy service result as appropriate.
 2. **Given** the backend cannot process chat requests, **When** a caller requests
    `/status`, **Then** the response makes the degraded or unavailable state
    detectable even when the backend process is still running.
-3. **Given** the backend process is running but the real LLM is misconfigured or
-   unreachable, **When** a caller requests `/health` and `/status`, **Then**
-   `/health` still reports the backend process itself as healthy while `/status`
-   exposes the active mode and degraded configuration state.
+3. **Given** the backend process is running but the real LLM provider (Vercel
+   AI SDK) is misconfigured or unreachable, **When** a caller requests
+   `/health` and `/status`, **Then** `/health` still reports the backend
+   process itself as healthy while `/status` exposes the active mode and
+   degraded configuration state.
 
 ---
 
@@ -154,14 +158,15 @@ checks are directed to that location.
   deployment concerns from v1 scope.
 - **FR-010**: The backend agent MUST use a deterministic mock response mode by
   default so the app can be exercised without external credentials.
-- **FR-011**: When valid external LLM credentials are provided through
-  configuration, the backend MUST route assistant replies through the real LLM
-  instead of the mock agent.
+- **FR-011**: When valid real LLM provider (Vercel AI SDK) credentials are
+  provided through configuration, the backend MUST route assistant replies
+  through the provider instead of the mock agent.
 - **FR-012**: The status endpoint MUST indicate whether the backend is operating
-  in mock mode or real LLM mode.
-- **FR-013**: When the backend is in real LLM mode, the status endpoint MUST make
-  configuration or upstream readiness issues inspectable without redefining the
-  top-level healthy signal away from backend process health.
+  in mock mode or real LLM provider mode (Vercel AI SDK mode).
+- **FR-013**: When the backend is in real LLM provider mode (Vercel AI SDK
+  mode), the status endpoint MUST make configuration or upstream readiness
+  issues inspectable without redefining the top-level healthy signal away
+  from backend process health.
 - **FR-014**: The `/status` endpoint MUST represent reply-generation impairment as
   a degraded or unavailable service state even when `/health` continues to report
   backend process availability.
@@ -215,5 +220,5 @@ checks are directed to that location.
   multiple conversations in v1.
 - Without external LLM credentials, the backend uses a mock agent that produces
   predictable streamed responses suitable for local development and manual testing.
-- When external LLM credentials are configured, the same chat flow uses the real
-  LLM without requiring frontend changes.
+- When real LLM provider (Vercel AI SDK) credentials are configured, the same
+  chat flow uses the provider without requiring frontend changes.

@@ -20,7 +20,7 @@ adapter when credentials are configured.
 **Language/Version**: TypeScript 5.x on Node.js 22+
 
 **Primary Dependencies**: Fastify, `@fastify/static`, Vite, Vitest, optional
-OpenAI-compatible SDK for real LLM mode
+Vercel AI SDK (AI SDK) for real LLM mode
 
 **Storage**: Browser `sessionStorage` for client-side thread restore; no server
 persistence

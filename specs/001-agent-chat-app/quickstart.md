@@ -13,7 +13,7 @@ Validate the v1 feature end-to-end in local development:
 
 - Node.js 22+
 - npm
-- Optional: real LLM credentials if validating non-mock mode
+- Optional: Vercel AI SDK provider credentials if validating non-mock mode
 
 ## Planned Command Surface
 
@@ -34,7 +34,7 @@ Set the frontend backend endpoint before starting the frontend:
 export FRONTEND_BACKEND_URL=http://localhost:3000
 ```
 
-Optional real LLM mode:
+Optional real LLM provider mode (Vercel AI SDK):
 
 ```bash
 export CHAT_REPLY_MODE=real-llm
